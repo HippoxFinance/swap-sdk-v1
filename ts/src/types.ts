@@ -2,7 +2,6 @@
 /**
  * Shared types for the HippoxSwap V1 SDK.
  */
-
 import type {
     Address,
     Chain,
@@ -11,7 +10,6 @@ import type {
     WalletClient,
     Transport,
 } from "viem";
-
 /**
  * Connection mode for the SDK client.
  * - "public": read-only, no signer.
@@ -19,7 +17,6 @@ import type {
  * - "browserWallet": sign with an injected EIP-1193 provider (browser).
  */
 export type HippoxSwapV1Mode = "public" | "privateKey" | "browserWallet";
-
 /**
  * Base configuration shared by all modes.
  */
@@ -31,14 +28,12 @@ export interface HippoxSwapV1BaseConfig {
     weth: Address;
     oracle?: Address;
 }
-
 /**
  * Read-only config. No signer.
  */
 export interface HippoxSwapV1PublicConfig extends HippoxSwapV1BaseConfig {
     mode: "public";
 }
-
 /**
  * Local private key config. Used by Tauri and Node scripts.
  */
@@ -46,7 +41,6 @@ export interface HippoxSwapV1PrivateKeyConfig extends HippoxSwapV1BaseConfig {
     mode: "privateKey";
     privateKey: `0x${string}`;
 }
-
 /**
  * Browser wallet config. Uses an injected EIP-1193 provider.
  */
@@ -55,7 +49,6 @@ export interface HippoxSwapV1BrowserWalletConfig
     mode: "browserWallet";
     ethereum: unknown; // EIP-1193 provider, validated at runtime
 }
-
 /**
  * Union of all supported configs.
  */
@@ -63,7 +56,6 @@ export type HippoxSwapV1Config =
     | HippoxSwapV1PublicConfig
     | HippoxSwapV1PrivateKeyConfig
     | HippoxSwapV1BrowserWalletConfig;
-
 /**
  * Aggregated snapshot of a pair's state.
  */
@@ -87,7 +79,6 @@ export interface HippoxSwapV1PairInfo {
     protocolFeeNumerator: bigint;
     feeTo: Address;
 }
-
 /**
  * Parameters for ERC20/ERC20 liquidity.
  */
@@ -102,7 +93,6 @@ export interface HippoxSwapV1AddLiquidityParams {
     deadline: bigint;
     hook?: Address;
 }
-
 /**
  * Parameters for ETH/token liquidity.
  */
@@ -116,7 +106,6 @@ export interface HippoxSwapV1AddLiquidityETHParams {
     value: bigint;
     hook?: Address;
 }
-
 /**
  * Parameters for removing ERC20/ERC20 liquidity.
  */
@@ -129,7 +118,6 @@ export interface HippoxSwapV1RemoveLiquidityParams {
     to: Address;
     deadline: bigint;
 }
-
 /**
  * Parameters for removing ETH/token liquidity.
  */
@@ -141,7 +129,6 @@ export interface HippoxSwapV1RemoveLiquidityETHParams {
     to: Address;
     deadline: bigint;
 }
-
 /**
  * Parameters for exact-in token to token swaps.
  */
@@ -152,7 +139,6 @@ export interface HippoxSwapV1SwapExactTokensParams {
     to: Address;
     deadline: bigint;
 }
-
 /**
  * Parameters for exact-out token to token swaps.
  */
@@ -163,7 +149,6 @@ export interface HippoxSwapV1SwapTokensForExactParams {
     to: Address;
     deadline: bigint;
 }
-
 /**
  * Parameters for exact-in ETH to token swaps.
  */
@@ -174,7 +159,6 @@ export interface HippoxSwapV1SwapExactETHForTokensParams {
     deadline: bigint;
     value: bigint;
 }
-
 /**
  * Parameters for exact-in token to ETH swaps.
  */
@@ -185,7 +169,6 @@ export interface HippoxSwapV1SwapExactTokensForETHParams {
     to: Address;
     deadline: bigint;
 }
-
 /**
  * Event payload emitted by the pair Swap event.
  */
@@ -197,7 +180,6 @@ export interface HippoxSwapV1SwapEvent {
     amount1Out: bigint;
     to: Address;
 }
-
 /**
  * Event payload emitted by the pair Mint event.
  */
@@ -206,7 +188,6 @@ export interface HippoxSwapV1MintEvent {
     amount0: bigint;
     amount1: bigint;
 }
-
 /**
  * Event payload emitted by the pair Burn event.
  */
@@ -216,7 +197,6 @@ export interface HippoxSwapV1BurnEvent {
     amount1: bigint;
     to: Address;
 }
-
 /**
  * Generic read context. Used by modules to access the public client and config.
  */
@@ -227,14 +207,12 @@ export interface HippoxSwapV1ReadContext {
     weth: Address;
     oracle?: Address;
 }
-
 /**
  * Generic write context. Extends the read context with an optional wallet client.
  */
 export interface HippoxSwapV1WriteContext extends HippoxSwapV1ReadContext {
     walletClient?: WalletClient;
 }
-
 /**
  * Result of a write call.
  */
